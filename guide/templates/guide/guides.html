@@ -1,0 +1,51 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="position-absolute top-50 start-50 translate-middle">
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="input-group mb-3" style="width: 50rem;">
+        <input type="text" class="form-control" name="location" id="basic-url" aria-describedby="basic-addon3">
+        <button type="submit" class="input-group-text" id="basic-addon3">Search</button>
+        <a href="{% url 'guides' %}" class="input-group-text" style="text-decoration: none;">Reset Search</a>
+    </div>
+</form>
+{% if guides_list %}
+<div class="album py-5 bg-light">
+    <h1>Guides</h1>
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">  
+            {% for guide in guides_list %}    
+            <div class="col">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <p class="card-text">
+                            Name: <span class="badge bg-dark ml-3">{{ guide.username }}</span><br>
+                            Location: <span class="badge bg-warning">{{ guide.location }}</span><br>
+                            Price: <span class="badge bg-success">{{ guide.price }}</span><br>
+                        </p>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <a href="{% url 'single-guide' guide.id %}" class="btn btn-primary">View</a>
+                                {% if request.user.tourist %}
+                                <a href="{% url 'book-guide' guide.id %}" class="btn btn-success">Book</a>
+                                {% endif %}
+                            </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+<!--div class="card" style="width: 50rem;">
+    <ul class="list-group"></ul>
+        <li class="list-group-item">
+            Name: <span class="badge bg-dark ml-3">{{ guide.username }}</span><br>
+            Location: <span class="badge bg-warning">{{ guide.location }}</span><br>
+            Price: <span class="badge bg-success">{{ guide.price }}</span><br>
+        </li>
+    </ul>
+</div>
+</div-->
+{% endblock content %}

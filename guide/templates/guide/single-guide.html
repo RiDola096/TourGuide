@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="card position-absolute top-50 start-50 translate-middle" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title badge bg-primary">{{ profile.username }}</h5>
+      <p class="card-text">First Name: {{ profile.first_name }}</p>
+      <p class="card-text">Last Name: {{ profile.last_name }}</p>
+      <h5 class="card-subtitle" >I am from {{ profile.location }}</h5>
+      <p class="card-text">My 2 days price is <span class="badge bg-success">{{ profile.price }}</span></p>
+      <p class="card-text">{{ profile.bio }}</p>
+      <p class="card-text">Phone: {{ profile.phone }}</p>
+      <a href="{% url 'book-guide' profile.id %}" class="btn btn-success">Book</a>
+    </div>
+</div>
+{% endblock content %}

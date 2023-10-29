@@ -1,0 +1,29 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="position-absolute top-50 start-50 translate-middle">
+<div class="text-center mt-3">
+    <main class="form-signin">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- Username -->
+            <div class="mb-3 form-floating">
+                <label for="username" class="form-label">Username: </label>
+                <input type="text" name="username" id="username">
+            </div>
+            
+            <!-- Password -->
+            <div class="mb-3 form-floating">
+                <label for="password" class="form-label">Password: </label>
+                <input type="password" name="password" id="password">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </main>
+</div>
+
+<p class="text-center mt-5 mb-3">Don't have an account? <a href="{% url 'tourist-signup' %}">Sign Up As Tourist</a> or <a href="{% url 'guide-signup' %}">Sign Up As Guide</a></p>
+</div>
+{% endblock content %}

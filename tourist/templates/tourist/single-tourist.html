@@ -1,0 +1,13 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="card position-absolute top-50 start-50 translate-middle" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title badge bg-dark">{{ profile.username }}</h5>
+      <p class="card-text">First Name: {{ profile.first_name }}</p>
+      <p class="card-text">Last Name: {{ profile.last_name }}</p>
+      <p class="card-text">Phone: {{ profile.phone }}</p>
+      <p class="card-text">Email: {{ profile.email }}</p>
+    </div>
+</div>
+{% endblock content %}

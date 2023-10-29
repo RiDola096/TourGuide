@@ -1,0 +1,14 @@
+<div class="text-center mt-3">
+    <main class="form-signin">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="mb-3 form-floating">
+                <label for="exampleInputEmail1" class="form-label">{{ field.label }}</label>
+                {{ field }}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">{{ submit_button_text }}</button>
+        </form>
+    </main>
+</div>

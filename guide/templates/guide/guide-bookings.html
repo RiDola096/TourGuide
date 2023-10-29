@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="position-absolute top-50 start-50 translate-middle">
+{% if bookings %}
+<div class="card" style="width: 50rem;">
+    <h1>Bookings</h1>
+    <ul class="list-group"></ul>
+    {% for booking in bookings %}
+        <li class="list-group-item">
+            Name:<span class="badge bg-dark ml-3">{{ booking.tourist.username }}</span>
+            Offered Price:<span class="badge bg-success">{{ booking.offer }}</span>
+            Trip Duration:<span class="badge bg-info">{{ booking.trip_duration }}</span>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="{% url 'single-tourist' booking.tourist.id %}" class="btn btn-primary">View</a>
+                {% if not booking.status == 'Cancelled' %}
+                <a href="{% url 'guide-accept-booking' booking.id %}" class="btn btn-success">Accept</a>
+                {% endif %}
+                <a href="{% url 'guide-cancel-booking' booking.id %}" class="btn btn-danger">Cancel</a>
+            </div>
+            {% if booking.status == 'Pending' %}
+            <span class="badge bg-warning">
+            {% elif booking.status == 'Accepted' %}
+            <span class="badge bg-success">
+            {% elif booking.status == 'Cancelled' %}
+            <span class="badge bg-danger">
+            {% else %}
+            <span class="badge bg-info">
+            {% endif %}
+                {{ booking.status }}
+            </span>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+</div>
+{% endblock content %}
